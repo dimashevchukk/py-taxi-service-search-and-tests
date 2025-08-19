@@ -27,7 +27,7 @@ class ManufacturerListViewTest(TestCase):
         self.assertNotEqual(response.status_code, 200)
         self.assertRedirects(
             response,
-            f"/accounts/login/?next={reverse("taxi:manufacturer-list")}"
+            f"/accounts/login/?next={reverse('taxi:manufacturer-list')}"
         )
 
     def test_list_view_without_search(self):
@@ -77,7 +77,7 @@ class CarListViewTest(TestCase):
         self.assertNotEqual(response.status_code, 200)
         self.assertRedirects(
             response,
-            f"/accounts/login/?next={reverse("taxi:car-list")}"
+            f"/accounts/login/?next={reverse('taxi:car-list')}"
         )
 
     def test_list_view_without_search(self):
@@ -122,7 +122,7 @@ class DriverListViewTest(TestCase):
         response = self.client.get(reverse("taxi:driver-list"))
         self.assertRedirects(
             response,
-            f"/accounts/login/?next={reverse("taxi:driver-list")}"
+            f"/accounts/login/?next={reverse('taxi:driver-list')}"
         )
 
     def test_list_view_without_search(self):
