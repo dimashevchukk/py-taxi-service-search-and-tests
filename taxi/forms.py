@@ -2,13 +2,16 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
-from taxi.models import Car, Driver
+from taxi.models import Car
 from taxi.validators import validate_license_number
+
+
+User = get_user_model()
 
 
 class CarForm(forms.ModelForm):
     drivers = forms.ModelMultipleChoiceField(
-        queryset=get_user_model().objects.all(),
+        queryset=User.objects.all(),
         widget=forms.CheckboxSelectMultiple,
     )
 
@@ -28,7 +31,7 @@ class CarModelSearchForm(forms.Form):
 
 class DriverCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
-        model = Driver
+        model = User
         fields = UserCreationForm.Meta.fields + (
             "license_number",
             "first_name",
@@ -41,7 +44,7 @@ class DriverCreationForm(UserCreationForm):
 
 class DriverLicenseUpdateForm(forms.ModelForm):
     class Meta:
-        model = Driver
+        model = User
         fields = ["license_number"]
 
     def clean_license_number(self):
